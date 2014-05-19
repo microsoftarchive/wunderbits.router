@@ -57,7 +57,7 @@ router.start();
 
 ### Handle only specific urls
 
-Execute a handler only when the url **exactly matches** a string.
+Execute a handler only when the url exactly matches a string.
 
 ```javascript
 var MyRouter = Router.extend({
@@ -72,7 +72,7 @@ var MyRouter = Router.extend({
 
 ### Pattern matching and variables
 
-Execute a handler only when the url **matches** a pattern, and extract params from the url string.
+Execute a handler only when the url matches a pattern, and extract params from the url string.
 
 ```javascript
 function myMiddleware (req, next) {
@@ -91,9 +91,9 @@ var MyRouter = Router.extend({
 });
 ```
 
-### Use handler constructors
+### Use middleware constructors
 
-If you want to fit your handlers into a class-based system, you can define a ```constructors``` object and reference it with ```handlerName#methodName```.
+If you want to fit your middleware into a class-based system, you can define a ```constructors``` object and reference it with ```handlerName#methodName```.
 
 ```javascript
 var MyHandler = require('wunderbits.core').WBKlass.extend({
