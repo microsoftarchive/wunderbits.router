@@ -4,6 +4,7 @@ wunderbits.router
 badges...
 
 A simple and fast client side router that processes URL changes with middleware
+**WORK IN PROGRESS, NOT READY TO BE USED!***
 
 ### Getting started
 
