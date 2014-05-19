@@ -5,7 +5,7 @@ badges...
 
 A simple and fast client side router that processes URL changes with middleware
 
-## Getting started
+### Getting started
 
 First, install from npm.
 
@@ -31,7 +31,7 @@ router.use(myMiddleware);
 router.start();
 ```
 
-## Scope middleware to certain urls and patterns
+### Scope middleware to certain urls and patterns
 
 ```javascript
 // Will trigger when the url is exactly /foo/bar
@@ -41,7 +41,7 @@ router.use('/foo/bar', myMiddleware);
 router.use(/^\/foo\/bar/, myMiddleware);
 ```
 
-## Configure middleware in class definiton
+### Configure middleware in class definiton
 
 ```javascript
 var Router = require('wunderbits.router').Router;
@@ -55,7 +55,7 @@ var router = new MyRouter();
 router.start();
 ```
 
-## Handle only specific urls
+### Handle only specific urls
 
 Execute a handler only when the url **exactly matches** a string.
 
@@ -70,7 +70,7 @@ var MyRouter = Router.extend({
 });
 ```
 
-## Pattern matching and variables
+### Pattern matching and variables
 
 Execute a handler only when the url **matches** a pattern, and extract params from the url string.
 
@@ -91,7 +91,7 @@ var MyRouter = Router.extend({
 });
 ```
 
-## Use handler constructors
+### Use handler constructors
 
 If you want to fit your handlers into a class-based system, you can define a ```constructors``` object and reference it with ```handlerName#methodName```.
 
@@ -129,18 +129,18 @@ var MyRouter = Router.extend({
 });
 ```
 
-## Develop and contribute
+### Develop and contribute
 
 1. First, fork this repo.
 2. Implement something awesome
 3. Write tests and run them with ```npm test```
 4. Submit a pull request
 
-## Credits
+### Credits
 
 Author: [Adam Renklint](http://adamrenklint.com)
 
-## License
+### License
 
 Copyright (c) 2014 6 Wunderkinder GmbH
 
