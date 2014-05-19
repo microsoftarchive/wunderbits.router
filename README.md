@@ -3,7 +3,7 @@ wunderbits.router
 
 badges...
 
-A simple and fast client side router that processes URL changes with a *middleware chain*.
+A simple and fast client side router that processes URL changes with middleware
 
 ## Getting started
 
@@ -23,12 +23,30 @@ var myMiddleware = function (req, next) {
 };
 ```
 
-Add and start the router.
+Create a router instance, add the middleware and start routing.
+```javascript
+var Router = require('wunderbits.router').Router;
+var router = new Router();
+router.use(myMiddleware);
+router.start();
+```
+
+## Scope middleware to certain urls and patterns
+
+```javascript
+// Will trigger when the url is exactly /foo/bar
+router.use('/foo/bar', myMiddleware);
+
+// Will trigger when the url matches the regexp
+router.use(/^\/foo\/bar/, myMiddleware);
+```
+
+## Configure middleware in class definiton
 
 ```javascript
 var Router = require('wunderbits.router').Router;
 var MyRouter = Router.extend({
-  'handlers': [
+  'middleware': [
     myMiddleware
   ]
 });
@@ -43,9 +61,9 @@ Execute a handler only when the url **exactly matches** a string.
 
 ```javascript
 var MyRouter = Router.extend({
-  'handlers': [
+  'middleware': [
     {
-      "handler": myMiddleware,
+      "fn": myMiddleware,
       "url": "/foo/bar"
     }
   ]
@@ -64,10 +82,10 @@ function myMiddleware (req, next) {
 }
 
 var MyRouter = Router.extend({
-  'handlers': [
+  'middleware': [
     {
-      "handler": myMiddleware,
-      "pattern": /^\/foo\/:id/
+      "fn": myMiddleware,
+      "url": /^\/foo\/:id/
     }
   ]
 });
@@ -75,10 +93,10 @@ var MyRouter = Router.extend({
 
 ## Use handler constructors
 
-If you want to fit your handlers into a class-based system, you can define a ```handlerConstructors``` object and reference it with ```handlerName#methodName```.
+If you want to fit your handlers into a class-based system, you can define a ```constructors``` object and reference it with ```handlerName#methodName```.
 
 ```javascript
-var MyHandler = require('wunderbits.core').Klass.extend({
+var MyHandler = require('wunderbits.core').WBKlass.extend({
   'doSomething': function (req, next) {
     // your awesome logic goes in here...
     next();
@@ -86,16 +104,30 @@ var MyHandler = require('wunderbits.core').Klass.extend({
 });
 
 var MyRouter = Router.extend({
-  "handleConstructors": {
+  "constructors": {
     "foo": MyHandler
   },
-  "handlers": [
+  "middleware": [
     "foo#doSomething"
   ]
 });
 ```
 
----
+A more complex example, with strict equals or pattern matching.
+
+```javascript
+var MyRouter = Router.extend({
+  "constructors": {
+    "foo": MyHandler
+  },
+  "middleware": [
+    {
+      "fn": "foo#doSomething",
+      "url": "/foo/bar"
+    }
+  ]
+});
+```
 
 ## Develop and contribute
 
@@ -104,11 +136,11 @@ var MyRouter = Router.extend({
 3. Write tests and run them with ```npm test```
 4. Submit a pull request
 
-### Credits
+## Credits
 
 Author: [Adam Renklint](http://adamrenklint.com)
 
-### License
+## License
 
 Copyright (c) 2014 6 Wunderkinder GmbH
 
